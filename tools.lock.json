@@ -1,0 +1,95 @@
+{
+  "packages": [
+    {
+      "role": "pwsh",
+      "id": "powershell-7.6.5-win-x64",
+      "url": "https://github.com/PowerShell/PowerShell/releases/download/v7.6.5/PowerShell-7.6.5-win-x64.zip",
+      "archiveSha256": "32EB8F6CDCE08F86E987D625A2733E54AC3E289AE7E1621B14C0B5BCEC2434EA",
+      "entry": "pwsh.exe",
+      "entrySha256": "362A356CE7F0940EC74F73A8FC2C990A2CC24A38A11C90BBD8ECA947110AD139",
+      "required": {
+        "pwsh.exe": "362A356CE7F0940EC74F73A8FC2C990A2CC24A38A11C90BBD8ECA947110AD139"
+      },
+      "archiveBytes": 106319290,
+      "extractedBytes": 256592846.0
+    },
+    {
+      "role": "dotnet",
+      "id": "dotnet-sdk-7.0.203-win-x64",
+      "url": "https://builds.dotnet.microsoft.com/dotnet/Sdk/7.0.203/dotnet-sdk-7.0.203-win-x64.zip",
+      "archiveSha256": "9765777291F5BBECB99F059932FEAC7563F523322E14B94D3814BCF50CAE4D80",
+      "entry": "dotnet.exe",
+      "entrySha256": "7862F178484A55852977B9D381EB3A999547B060649ECC74905ED8B8E00E63F2",
+      "required": {
+        "dotnet.exe": "7862F178484A55852977B9D381EB3A999547B060649ECC74905ED8B8E00E63F2"
+      },
+      "archiveBytes": 265550964,
+      "extractedBytes": 687274226.0
+    },
+    {
+      "role": "node",
+      "id": "node-v24.22.1-win-x64",
+      "url": "https://nodejs.org/dist/v24.22.1/node-v24.22.1-win-x64.zip",
+      "archiveSha256": "D2046D28C2C3DCD211AC5145C0BF30E2047EF9DFB306693C8C6E2ECCD8B95FA5",
+      "entry": "node-v24.22.1-win-x64/node.exe",
+      "entrySha256": "D702DAA815EABBFF763C7D3808E235CF031CF2CA70211B56847BC72F51E240E5",
+      "required": {
+        "node-v24.22.1-win-x64/node.exe": "D702DAA815EABBFF763C7D3808E235CF031CF2CA70211B56847BC72F51E240E5"
+      },
+      "archiveBytes": 37748064,
+      "extractedBytes": 107345970.0
+    },
+    {
+      "role": "cmake",
+      "id": "cmake-4.4.4-windows-x86_64",
+      "url": "https://github.com/Kitware/CMake/releases/download/v4.4.4/cmake-4.4.4-windows-x86_64.zip",
+      "archiveSha256": "BACE36E94B31C68AB6FA295F26DFA11219E0701CF7C94B0284A7D1CB13DAC536",
+      "entry": "cmake-4.4.4-windows-x86_64/bin/cmake.exe",
+      "entrySha256": "3A329667300846ABC8DFFCCBDCB1C8C2D4A6CEBE342D499181825205EA8C766C",
+      "required": {
+        "cmake-4.4.4-windows-x86_64/bin/cmake.exe": "3A329667300846ABC8DFFCCBDCB1C8C2D4A6CEBE342D499181825205EA8C766C"
+      },
+      "archiveBytes": 54400562,
+      "extractedBytes": 143310580.0
+    },
+    {
+      "role": "sdk",
+      "id": "psn00bsdk-0.24-win32",
+      "url": "https://github.com/Lameguy64/PSn00bSDK/releases/download/v0.24/PSn00bSDK-0.24-win32.zip",
+      "archiveSha256": "13A355AFA89ECB2505882388841C42D9D231D40BBBE9AE22EB5E16ABE19B2EA7",
+      "entry": "PSn00bSDK-0.24-win32/bin/mipsel-none-elf-gcc.exe",
+      "entrySha256": "6CCBDB837A0163A971FAF38816717F050FD535D8553D87F570F23C6CFDD9F7AE",
+      "required": {
+        "PSn00bSDK-0.24-win32/bin/mipsel-none-elf-gcc.exe": "6CCBDB837A0163A971FAF38816717F050FD535D8553D87F570F23C6CFDD9F7AE",
+        "PSn00bSDK-0.24-win32/bin/ninja.exe": "5B40086E37E66EF29D69ED2E9543B2F9EACCC9A73EEB2297727F94AB821A4BC7",
+        "PSn00bSDK-0.24-win32/bin/mkpsxiso.exe": "76C16D25E93C49C5D467AF7DEBAE1CBC5D7E241E44B94D8258288B26D7982EB6"
+      },
+      "archiveBytes": 75100474,
+      "extractedBytes": 206230614.0
+    },
+    {
+      "role": "ffmpeg",
+      "id": "jellyfin-ffmpeg_7.1.4-3_portable_win64-clang-gpl",
+      "url": "https://github.com/jellyfin/jellyfin-ffmpeg/releases/download/v7.1.4-3/jellyfin-ffmpeg_7.1.4-3_portable_win64-clang-gpl.zip",
+      "archiveSha256": "113ADEB702683C38BE40A65D859F8EF7FFB07BAE9DF16DFB6C3DF5AC3D95EF3C",
+      "entry": "ffmpeg.exe",
+      "entrySha256": "812AC83375B8A926DA2859503D8C120544BD78DDC57ABAD026613D34C305A8D2",
+      "required": {
+        "ffmpeg.exe": "812AC83375B8A926DA2859503D8C120544BD78DDC57ABAD026613D34C305A8D2"
+      },
+      "archiveBytes": 60257737,
+      "extractedBytes": 165350912.0
+    },
+    {
+      "role": "mesen",
+      "id": "mesen-2.1.1-windows",
+      "url": "https://github.com/SourMesen/Mesen2/releases/download/2.1.1/Mesen_2.1.1_Windows.zip",
+      "archiveSha256": "23CCC2BC060B663C68DAD3A8C5D6DA7D23A50F872D04F135BAFA2B04FF7D5CBE",
+      "entry": "Mesen.exe",
+      "entrySha256": "D2EB03C2590C648BF329F127EBCFEFD70130E7690A9E2CCDBA8616FAEA1FE96B",
+      "archiveBytes": 34058170,
+      "source": "https://github.com/SourMesen/Mesen2/tree/137ae7ce3bf3f539d007e2c4ef3cb3b6c97672a1",
+      "extractedBytes": 77613568
+    }
+  ]
+}

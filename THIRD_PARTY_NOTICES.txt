@@ -1,0 +1,46 @@
+The NES RGB approximation table is attributed to OneLoneCoder's olcNES.
+Comparison reference: Part #4 - PPU Backgrounds/olc2C02.cpp
+Verified revision: ac5ce64cdb3a390a89d550c5f130682b37eeb080
+https://github.com/OneLoneCoder/olcNES/blob/ac5ce64cdb3a390a89d550c5f130682b37eeb080/Part%20%234%20-%20PPU%20Backgrounds/olc2C02.cpp
+License (OLC-3)
+
+Copyright 2018-2019 OneLoneCoder.com
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+1. Redistributions or derivations of source code must retain the above
+copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions or derivative works in binary form must reproduce
+the above copyright notice. This list of conditions and the following
+disclaimer must be reproduced in the documentation and/or other
+materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived
+from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+The RC3 bark encoder at tools/nes_v15/SpuAdpcm.cs is offered separately under
+the MIT terms in tools/nes_v15/SPU-ENCODER-LICENSE.txt. It was authored by
+Codex for the project's isolated specification-based encoder experiment
+using documented SPU block layout, filter coefficients and flags. No code
+from the legacy encoder or another encoder repository was incorporated.
+The authoring assistant had prior exposure during the provenance review,
+so this is not a formal clean-room claim. The format references are
+https://psx-spx.consoledev.net/soundprocessingunitspu/ and
+https://psx-spx.consoledev.net/cdromformat/. The notice covers only the
+encoder, not the ROM, generated bark, or the rest of the project.

@@ -1,0 +1,13 @@
+<!-- SPDX-License-Identifier: GPL-3.0-or-later; see LICENSE-MESEN-WORKER.md. -->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <AssemblyName>mesen_wave</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup><Compile Remove="BarkCompare.cs" /><Compile Remove="BarkSpu.cs" /></ItemGroup>
+</Project>
