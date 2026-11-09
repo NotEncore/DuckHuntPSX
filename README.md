@@ -1,4 +1,4 @@
-# Duck Hunt PS1
+# Duck Hunt PSX
 
 **A PlayStation homebrew project for my son, Oliver. Built with AI, tested on real hardware.**
 
