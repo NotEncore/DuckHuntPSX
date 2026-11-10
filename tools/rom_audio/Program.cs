@@ -86,6 +86,21 @@ void RenderEffects(string romPath, string traceDirectory, string output, string?
             throw new InvalidDataException($"The {name} window is silent.");
         Array.Resize(ref pcm, (int)Math.Round(length * rate / fps) + 28);
         byte[] encoded = Encoder.EncodePcm22050(pcm, out _);
+        if (name == "flap")
+        {
+            // Match the hardware-approved flap: scale ADPCM excitation by four
+            // while preserving predictor, sample nibbles, timing, and flags.
+            for (int block = 0; block < encoded.Length; block += 16)
+            {
+                if ((encoded[block] & 15) >= 2)
+                {
+                    encoded[block] -= 2;
+                    continue;
+                }
+                if (encoded.Skip(block + 2).Take(14).Any(value => value != 0))
+                    throw new InvalidDataException("Flap block cannot be scaled without changing its samples.");
+            }
+        }
         int used = encoded.Length;
         Array.Resize(ref encoded, (used + 63) & ~63);
         if (name == "tally")

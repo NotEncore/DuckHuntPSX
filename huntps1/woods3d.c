@@ -913,26 +913,27 @@ static void calibration_input(int port, PADTYPE sample, unsigned down, int edge)
 }
 static int poll_pause(const PADTYPE samples[2])
 {
- enum { BACK = 1, UP = 2, DOWN = 4, CONFIRM = 8 };
+ enum { BACK = 1, UP = 2, DOWN = 4, CONFIRM = 8, B_BUTTON = 16 };
  unsigned buttons = 0;
  for (int i = 0; i < 2; i++) {
   const PADTYPE *p = &samples[i];
   if (p->stat != 0) continue;
   if (p->type == PAD_ID_GUNCON) {
-   if (!(p->btn & GCON_B)) buttons |= BACK;
-   if (!(p->btn & GCON_A)) buttons |= DOWN;
+   if (!(p->btn & GCON_B)) buttons |= B_BUTTON;
+   if (!(p->btn & GCON_A)) buttons |= UP;
    if (!(p->btn & GCON_TRIGGER)) buttons |= CONFIRM;
   } else if (p->type == PAD_ID_DIGITAL || p->type == PAD_ID_ANALOG) {
-   if (!(p->btn & PAD_START) || !(p->btn & PAD_SQUARE)) buttons |= BACK;
-   if (!(p->btn & PAD_UP)) buttons |= UP;
-   if (!(p->btn & PAD_DOWN) || !(p->btn & PAD_TRIANGLE)) buttons |= DOWN;
+   if (!(p->btn & PAD_START) || (paused && !(p->btn & PAD_SELECT))) buttons |= BACK;
+   if (!(p->btn & PAD_UP) || !(p->btn & PAD_TRIANGLE)) buttons |= UP;
+   if (!(p->btn & PAD_DOWN)) buttons |= DOWN;
+   if (!(p->btn & PAD_SQUARE)) buttons |= B_BUTTON;
    if (!(p->btn & PAD_CROSS)) buttons |= CONFIRM;
   }
  }
  unsigned down = buttons & ~pause_buttons;
  pause_buttons = buttons;
  if (!paused) {
-  if (!(down & BACK) || phase == SELECT || phase == CAL_P2 || phase == RESULTS)
+  if (!(down & (BACK | B_BUTTON)) || phase == SELECT || phase == CAL_P2 || phase == RESULTS)
    return 0;
   paused = 1;
   pause_item = 0;
@@ -955,7 +956,7 @@ static int poll_pause(const PADTYPE samples[2])
 #endif
    }
   }
- } else if (down & (UP | DOWN)) {
+ } else if (down & (UP | DOWN | B_BUTTON)) {
   pause_item = (pause_item + (down & UP ? 2 : 1)) % 3;
  }
  for (int i = 0; i < 2; i++) {
@@ -1736,7 +1737,9 @@ int woods3d_run_deluxe(uint8_t input[2][34], const GunCal *saved_calibration,
  pads = input;
  calibration = *saved_calibration;
  solo_port = primary_port;
+ hunt_sfx_set_woods_mix(1);
  run_woods(selected_players,2);
+ hunt_sfx_set_woods_mix(0);
  DrawSync(0);
  return phase == FADE_OUT && tick > FADE_TICKS;
 }
@@ -1756,7 +1759,9 @@ int main(void)
  hunt_cal_card_init();
  g_woods3d.card = hunt_cal_load(&calibration);
  hunt_sfx_init();
+ hunt_sfx_set_woods_mix(1);
  run_woods(1,1);
+ hunt_sfx_set_woods_mix(0);
  return 0;
 }
 #endif

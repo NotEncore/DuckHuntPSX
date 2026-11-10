@@ -35,7 +35,7 @@ try {
     & "$PSScriptRoot/tools/build_from_user_rom.ps1" -Rom $Rom -MesenCore $MesenCore -SdkDirectory $Sdk -Ffmpeg $Ffmpeg -OutputDirectory $work
     $exe = "$work/candidate/build/duckhunt.exe"
     $sha = (Get-FileHash -LiteralPath $exe).Hash
-    if ($sha -ne '5BB5BA113A247FAAB6F798342D359FA63EF52502A14507CE2E841B3D2FCCC3A6') {
+    if ($sha -ne '9912308CFB2E560114B9E589DF9C44174C736896EA6B286716DD40F868AF0E92') {
         throw "Build does not match the verified executable. Keep the private build for investigation. SHA-256: $sha"
     }
     $out = "$PSScriptRoot/output/$id"

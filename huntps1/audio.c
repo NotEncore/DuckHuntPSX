@@ -38,13 +38,13 @@ typedef struct {
 } GameEffect;
 
 #ifdef HUNTPS1_WOODS_SOUND
-enum { WOODS_STEP_VOICE = 11, WOODS_STEP_VOLUME = 0x0c00 };
+enum { WOODS_STEP_VOICE = 11, WOODS_STEP_VOLUME = 0x3fff };
 #endif
 #define EFFECT(id, voice, volume, name, stem) \
 	{ id, voice, volume, game_a_##name, sizeof(game_a_##name), GAME_A_##stem##_ADPCM, 0 }
 static GameEffect game_effects[] = {
 	EFFECT(SFX_SHOT,      1, 0x2800, shot, SHOT),
-	EFFECT(SFX_FLAP,      1, 0x1300, flap, FLAP),
+	EFFECT(SFX_FLAP,      1, 0x1537, flap, FLAP), /* Test 4: ADPCM excitation scaled 4x. */
 	EFFECT(SFX_QUACK,     2, 0x2800, call, CALL),
 	EFFECT(SFX_FALL,      3, 0x3000, fall, FALL),
 	EFFECT(SFX_LAND,      3, 0x1c00, land, LAND),
@@ -82,6 +82,7 @@ enum { GAME_B_FLAP_VOICE = 7,
 };
 static int game_voice_cue[GAME_EFFECT_VOICES], game_voice_age[GAME_EFFECT_VOICES];
 static int game_shot_this_frame;
+static int woods_mix;
 #endif
 
 #define TITLE_DEST   0x1010
@@ -90,7 +91,7 @@ static int game_shot_this_frame;
 #define PLAY_RATE    22050
 #define VOICE_MUSIC  0
 #define VOICE_DOG    4
-#define BARK_VOLUME  0x0262 /* RB5: NES-reference bark balance test. */
+#define BARK_VOLUME  0x1e00 /* Test 4: +22 dB over the v1.0.0 voice gain. */
 #define STOP_WAIT    8
 #define TITLE_ADPCM  47840
 #define TITLE_XFER   47872
@@ -272,8 +273,16 @@ static void play_game_effect_on(int id, int voice_override)
 		SpuSetKey(0, 1u << voice);
 		SPU_CH_FREQ(voice) = getSPUSampleRate(PLAY_RATE);
 		SPU_CH_ADDR(voice) = getSPUAddr(e->address);
-		SPU_CH_VOL_L(voice) = e->volume;
-		SPU_CH_VOL_R(voice) = e->volume;
+		int volume = e->volume;
+		if (woods_mix) {
+			switch (id) {
+			case SFX_QUACK: volume = 0x3fff; break;
+			case SFX_LAND:  volume = 0x3000; break;
+			default: break;
+			}
+		}
+		SPU_CH_VOL_L(voice) = volume;
+		SPU_CH_VOL_R(voice) = volume;
 		SPU_CH_ADSR1(voice) = 0x00ff;
 		SPU_CH_ADSR2(voice) = 0;
 		SpuSetKey(1, 1u << voice);
@@ -629,6 +638,17 @@ void hunt_sfx_play(int id)
 		g_title_left = 0;
 		g_intro_left = INTRO_AUDIO_FRAMES;
 	}
+}
+
+void hunt_sfx_set_woods_mix(int active)
+{
+#ifdef HUNTPS1_GAME_A_AUDIO
+	if (woods_mix && !active)
+		hit_call_left = 0;
+	woods_mix = active;
+#else
+	(void)active;
+#endif
 }
 
 void hunt_sfx_begin_flight(void)

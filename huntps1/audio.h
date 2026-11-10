@@ -34,6 +34,7 @@ void hunt_sfx_frame(void);
 void hunt_sfx_reset(void);
 void hunt_sfx_pause(int on);
 void hunt_sfx_play(int id);
+void hunt_sfx_set_woods_mix(int active);
 void hunt_sfx_play_buf(const uint8_t *adpcm, int bytes, int rate);
 void hunt_sfx_stop_loops(void);
 void hunt_sfx_stop_music(void);

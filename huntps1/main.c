@@ -1160,12 +1160,11 @@ int main(void)
 				}
 			} else {
 				ab_hold = 0;
-				if (btn_up && !prev_up) {
+				if ((btn_up && !prev_up) || (btn_a && !prev_a)) {
 					menu_sel--;
 					if (menu_sel < 0)
 						menu_sel = last_menu_item;
-				}
-				if ((btn_a && !prev_a) || (btn_b && !prev_b) || (btn_dn && !prev_dn)) {
+				} else if ((btn_b && !prev_b) || (btn_dn && !prev_dn)) {
 					menu_sel++;
 					if (menu_sel > last_menu_item)
 						menu_sel = 0;
@@ -1251,11 +1250,11 @@ restart_clay:
 #ifdef HUNTPS1_DELUXE_MENU
 				return_state = options_return;
 #endif
-				if (btn_up && !prev_up)
+				if ((btn_up && !prev_up) || (btn_a && !prev_a))
 					options_sel = (options_sel + options_count - 1) % options_count;
-				else if ((btn_a && !prev_a) || (btn_dn && !prev_dn))
+				else if ((btn_b && !prev_b) || (btn_dn && !prev_dn))
 					options_sel = (options_sel + 1) % options_count;
-				if (btn_b && !prev_b)
+				if (btn_sel && !prev_sel)
 					state = return_state;
 				else if (trig && !prev_trig) {
 					if (options_sel == 0) {
@@ -1274,9 +1273,9 @@ restart_clay:
 #endif
 #ifdef HUNTPS1_DELUXE_MENU
 		if (state == ST_DELUXE) {
-			if ((btn_up && !prev_up) || (btn_b && !prev_b)) {
+			if ((btn_up && !prev_up) || (btn_a && !prev_a)) {
 				deluxe_sel = (deluxe_sel + 4) % 5;
-			} else if ((btn_a && !prev_a) || (btn_dn && !prev_dn)) {
+			} else if ((btn_b && !prev_b) || (btn_dn && !prev_dn)) {
 				deluxe_sel = (deluxe_sel + 1) % 5;
 			}
 			if (deluxe_sel >= 3 && title_side)
@@ -1301,11 +1300,11 @@ restart_clay:
 					deluxe_population = next;
 			}
 			deluxe_prev_horizontal = horizontal;
-			if (btn_up && !prev_up)
+			if ((btn_up && !prev_up) || (btn_a && !prev_a))
 				player_sel = (player_sel + 2) % 3;
-			else if ((btn_a && !prev_a) || (btn_dn && !prev_dn))
+			else if ((btn_b && !prev_b) || (btn_dn && !prev_dn))
 				player_sel = (player_sel + 1) % 3;
-			if ((btn_b && !prev_b) || (trig && !prev_trig && player_sel == 2))
+			if ((btn_sel && !prev_sel) || (trig && !prev_trig && player_sel == 2))
 				state = ST_DELUXE;
 			else if (trig && !prev_trig) {
 				deluxe_ports[0] = player_sel == 0 && gunp == pad2 ? 1 : 0;
@@ -1538,17 +1537,16 @@ restart_deluxe:
 #ifdef HUNTPS1_DELUXE_MENU
 			deluxe_held[0] = deluxe_held[1] = 1;
 #endif
-			if (btn_up && !prev_up) {
+			if ((btn_up && !prev_up) || (btn_a && !prev_a)) {
 				pause_sel--;
 				if (pause_sel < 0)
 					pause_sel = 2;
-			}
-			if ((btn_a && !prev_a) || (btn_dn && !prev_dn)) {
+			} else if ((btn_b && !prev_b) || (btn_dn && !prev_dn)) {
 				pause_sel++;
 				if (pause_sel > 2)
 					pause_sel = 0;
 			}
-			if (pause_ignore == 0 && btn_b && !prev_b) {
+			if (pause_ignore == 0 && ((btn_start && !prev_start) || (btn_sel && !prev_sel))) {
 				pause_ignore = 24;
 				hunt_sfx_pause(0);
 				state = pause_from;
